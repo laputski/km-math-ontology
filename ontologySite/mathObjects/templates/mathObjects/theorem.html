@@ -1,0 +1,13 @@
+<h1>{{ theorem.title }}</h1>
+<h3>Description</h3>
+{{ theorem.description }}
+
+<h3>Proof</h3>
+{{ theorem.proof }}
+
+<h3>Related objects</h3>
+<ul>
+{% for def in theorem.definition_set.all %}
+<li> {{def.title}} </li>
+{% endfor %}
+</ul>
