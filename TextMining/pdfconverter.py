@@ -1,3 +1,4 @@
+#Work with PDF
 from cStringIO import StringIO
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
@@ -7,6 +8,7 @@ from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+
 
 def pdf2txt(filename):
     fp= open(filename,'rb')
@@ -26,4 +28,3 @@ def pdf2txt(filename):
             lines+="".join(rstr)
     return lines
     
-
