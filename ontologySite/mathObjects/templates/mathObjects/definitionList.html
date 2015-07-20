@@ -1,0 +1,10 @@
+{% if definition_list %}
+	<b>Список всех Определений<b>:
+    <ul>
+    {% for definition in definition_list %}
+        <li><a href="{{ definition.id }}/">{{ definition.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Определений нет(</p>
+{% endif %}
