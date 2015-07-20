@@ -1,10 +1,5 @@
-{% if theorem_list %}
-	<b>All theorems<b>:
-    <ul>
-    {% for theorem in theorem_list %}
-        <li><a href="/mathObjects/{{ theorem.id }}/">{{ theorem.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No theorems:(</p>
-{% endif %}
+<h1>Главная страница</h1>
+<ul>
+    <li><a href="/mathObjects/theorems/"><h3>Список всех теорем</h3></a></li>
+	<li><a href="/mathObjects/definitions/"><h3>Список всех определений</h3></a></li>
+ </ul>

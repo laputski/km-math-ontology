@@ -1,6 +1,6 @@
-<h1>{{ theorem.title }}</h1>
+<h1>{{ definition.title }}</h1>
 <h3>Описание</h3>
-{{ theorem.description }}
+{{ definition.description }}
 <h3>Содержат:</h3>
 <ul>
     {% for object in useWhat %}
@@ -11,7 +11,7 @@
 		{% endif %}
     {% endfor %}
  </ul>
- <h3>Содержаться в:</h3>
+<h3>Содержаться в:</h3>
 <ul>
     {% for object in usedIn %}
 		{% if object.type == 'Definition' %}
@@ -21,21 +21,3 @@
 		{% endif %}
     {% endfor %}
  </ul>
-<!-- 
-<h3>Proof</h3>
-{{ theorem.proof }}
-
-<h3>Related objects</h3>
-<ul>
-{% for relatedObject in theorem.definition_set.all %}
-<li> {{relatedObject.title}} </li>
-{% endfor %}
-</ul>
-
-<h3>Related Definitions from Neo4j Data Base</h3>
-<ul>
-{% for definition in neo4j %}
-<li> {{ definition }} </li>
-{% endfor %}
-</ul>
--->

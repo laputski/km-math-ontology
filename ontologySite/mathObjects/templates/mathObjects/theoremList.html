@@ -1,0 +1,10 @@
+{% if theorem_list %}
+	<b>Список всех теорем<b>:
+    <ul>
+    {% for theorem in theorem_list %}
+        <li><a href="{{ theorem.id }}/">{{ theorem.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Теорем нет(</p>
+{% endif %}
