@@ -20,3 +20,8 @@ def entityList(request):
     template = loader.get_template('mathObjects/entityList.html')
     context = RequestContext(request, {'entity_list': entity_list,})
     return HttpResponse(template.render(context))
+
+def graph(request):
+    template = loader.get_template('mathObjects/graph.html')
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))
