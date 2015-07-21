@@ -8,28 +8,15 @@ def index(request):
     context = RequestContext(request)
     return HttpResponse(template.render(context))
 
-def theorem(request, theorem_id):
-    theorem = workWithNeo4j.theoremById(theorem_id)
-    useWhat = workWithNeo4j.useWhat(theorem_id)
-    usedIn = workWithNeo4j.usedIn(theorem_id)
-    context = RequestContext(request, {'theorem': theorem, 'useWhat': useWhat, 'usedIn': usedIn})
-    return render(request, 'mathObjects/theorem.html', context)
+def entity(request, entity_id):
+    entity = workWithNeo4j.entityById(entity_id)
+    childrens = workWithNeo4j.getChildrens(entity_id)
+    parents = workWithNeo4j.getParents(entity_id)
+    context = RequestContext(request, {'entity': entity, 'childrens': childrens, 'parents': parents})
+    return render(request, 'mathObjects/entity.html', context)
     
-def definition(request, definition_id):
-    definition = workWithNeo4j.definitionById(definition_id)
-    useWhat = workWithNeo4j.useWhat(definition_id)
-    usedIn = workWithNeo4j.usedIn(definition_id)
-    context = RequestContext(request, {'definition': definition, 'useWhat': useWhat, 'usedIn': usedIn})
-    return render(request, 'mathObjects/definition.html', context)
-    
-def theoremList(request):
-    theorem_list = workWithNeo4j.allTheorems()
-    template = loader.get_template('mathObjects/theoremList.html')
-    context = RequestContext(request, {'theorem_list': theorem_list,})
+def entityList(request):
+    entity_list = workWithNeo4j.allEntities()
+    template = loader.get_template('mathObjects/entityList.html')
+    context = RequestContext(request, {'entity_list': entity_list,})
     return HttpResponse(template.render(context))
-    
-def definitionList(request):
-    definition_list = workWithNeo4j.allDefinitions()
-    template = loader.get_template('mathObjects/definitionList.html')
-    context = RequestContext(request, {'definition_list': definition_list})
-    return HttpResponse(template.render(context)) 

@@ -1,0 +1,26 @@
+<h1>{{ entity.name }}</h1>
+
+<h3>Описание</h3>
+{{ entity.description }}
+
+<h3>Childrens:</h3>
+{%if childrens%}
+	<ul>
+		{% for object in childrens %}
+				<li><a href="{% url 'entity' object.id %}">{{ object.name }}</a></li>
+		{% endfor %}
+	 </ul>
+ {%else%}
+	Нету
+ {%endif%}
+ 
+ <h3>Parents:</h3>
+ {%if parents%}
+	<ul>
+		{% for object in parents %}
+				<li><a href="{% url 'entity' object.id %}">{{ object.name }}</a></li>
+		{% endfor %}
+	 </ul>
+ {%else%}
+	Нету
+ {%endif%}
