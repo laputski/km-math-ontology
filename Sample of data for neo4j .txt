@@ -1,0 +1,24 @@
+Заполнять по абзацам
+
+CREATE (:Entity {type:"Theorem", name:"Теорема Пифагора", description:"В прямоугольном треугольнике квадрат длины гипотенузы равен сумме квадратов длин катетов."})
+CREATE (:Entity {type:"Definition", name:"Треугольник", description: "Геометрическая фигура, образованная тремя отрезками, которые соединяют три точки, не лежащие на одной прямой."})
+CREATE (:Entity {type:"Definition", name:"Катет", description:"Одна из двух сторон прямоугольного треугольника, образующих прямой угол. "})
+CREATE (:Entity {type:"Definition", name:"Гипотенуза", description:"Cторона прямоугольного треугольника, противоположная прямому углу."})
+CREATE (:Entity {type:"Definition", name:"Прямой угол", description:"Угол в 90 градусов"})
+CREATE (:Entity {type:"Definition", name:"Угол", description:"Геометрическая фигура, образованная двумя лучами , выходящими из одной точки"})
+CREATE (:Entity {type:"Theorem", name:"Теорема о сумме углов многоугольника", description:"Сумма углов n-угольника равна 180°(n − 2)."})
+CREATE (:Entity {type:"Definition", name:"Многоугольник", description:"Замкнутые ломаные линии, не имеющие самопересечения."})
+
+MATCH (theorem:Entity {type:"Theorem", name:"Теорема Пифагора"})
+MATCH (difs:Entity {type:"Definition"})
+WHERE difs.name = "Треугольник" OR difs.name = "Катет" OR difs.name = "Гипотенуза" OR difs.name = "Прямой угол"
+CREATE difs-[:Using_in]->theorem
+
+MATCH (dif1:Entity {type:"Definition", name:"Угол"})
+MATCH (dif2:Entity {type:"Definition", name:"Прямой угол"})
+CREATE dif1-[:Using_in]->dif2
+
+MATCH (theorem:Entity {type:"Theorem", name:"Теорема о сумме углов многоугольника"})
+MATCH (difs:Entity {type:"Definition"})
+WHERE difs.name = "Многоугольник" OR difs.name = "Угол"
+CREATE difs-[:Using_in]->theorem
