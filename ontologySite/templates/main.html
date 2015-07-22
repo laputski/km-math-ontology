@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>Django</title>
+	<link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}">
+</head>
+ <style type="text/css">
+   #maket { 
+    width: 100%; 
+   }
+  TD {
+    vertical-align: top; /* Вертикальное выравнивание в ячейках */
+    padding: 5px; /* Поля вокруг ячеек */
+   }
+   TD#leftcol {
+    width: 200px; /* Ширина левой колонки */
+   }
+   TD#rightcol {
+   }
+   #spacer {
+    width: 10px; /* Расстояние между колонками */
+   }
+  </style>
+<div class="block1">
+<body>
+
+<h1><center><a href="/">Math Site</a></center></h1>
+ <table cellspacing="0" id="maket">
+   <tr> 
+    <td id="leftcol">{% block search %}{% endblock %}</td>
+    <td id="spacer"></td>
+    <td id="rightcol">{% block article %}{% endblock %}</td>
+   </tr>
+  </table>
+  
+</body>
+</html>
