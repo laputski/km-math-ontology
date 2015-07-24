@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="dropdown">
+	  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    Меню Редактирования
+		    <span class="caret"></span>
+	  	</button>
+  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#">Добавить чего-нибудь</a></li>
+		    <li><a href="#">Поменять чего-нибудь</a></li>
+  		</ul>
+	</div>
+
+	<p ><h1>Название: <b>{{ entity.name }}</b></h1></p>
+	<h2>
+		Тип: 
+		{% if entity.type == "Theorem" %}Теорема{% endif %}
+		{% if entity.type == "Definition" %}Определение{% endif %}
+	</h2>
+	<h2>Описание:</h2>
+	{{ entity.description }}
+
+	<p style='margin-top: 20px;'><b>Похоже тут будет граф </b></p>
+ 
+ {% endblock %}
+ 
