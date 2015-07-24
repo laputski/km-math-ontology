@@ -1,38 +1,28 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 
-{% block search %}
-<form action="/" method="post">
-<input type="text" name="term"> <input type="submit" value="Search">
-</form>
-{% endblock %}
+{% block content %}
+	
+	<div class="dropdown">
+	  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    Меню Редактирования
+		    <span class="caret"></span>
+	  	</button>
+  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#">Добавить чего-нибудь</a></li>
+		    <li><a href="#">Поменять чего-нибудь</a></li>
+  		</ul>
+	</div>
 
-{% block article %}
-<h1>{{ entity.name }}</h1>
+	<p ><h1>Название: <b>{{ entity.name }}</b></h1></p>
+	<h2>
+		Тип: 
+		{% if entity.type == "Theorem" %}Теорема{% endif %}
+		{% if entity.type == "Definition" %}Определение{% endif %}
+	</h2>
+	<h2>Описание:</h2>
+	{{ entity.description }}
 
-<h3>Описание</h3>
-{{ entity.description }}
-
-<h3>Childrens:</h3>
-{%if childrens%}
-	<ul>
-		{% for object in childrens %}
-				<li><a href="{% url 'entity' object.id %}">{{ object.name }}</a></li>
-		{% endfor %}
-	 </ul>
- {%else%}
-	Нету
- {%endif%}
- 
- <h3>Parents:</h3>
- {%if parents%}
-	<ul>
-		{% for object in parents %}
-				<li><a href="{% url 'entity' object.id %}">{{ object.name }}</a></li>
-		{% endfor %}
-	 </ul>
- {%else%}
-	Нету
- {%endif%}
+	<p style='margin-top: 20px;'><b>Похоже тут будет граф </b></p>
  
  {% endblock %}
  
