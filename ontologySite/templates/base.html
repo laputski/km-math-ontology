@@ -19,18 +19,16 @@
     {% include 'base_navbar.html' %}
 
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
 
-        <div class="col-md-3">
-          <div class="sidebar-nav-fixed affix">
-              <div class="well">
+        <div class="col-xs-2 sidebar">
+              <div class="well" style='margin-top: 50px'>
                   {% include 'search.html'%}
               </div>
-          </div>
         </div>
           
-        <div class="col-md-9">
+        <div class="col-xs-10 content">
              {% block content %}
              {% endblock %}
         </div>

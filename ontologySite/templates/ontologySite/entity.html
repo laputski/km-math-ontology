@@ -1,28 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	
-	<div class="dropdown">
-	  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		    Меню Редактирования
-		    <span class="caret"></span>
-	  	</button>
-  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		    <li><a href="#">Добавить чего-нибудь</a></li>
-		    <li><a href="#">Поменять чего-нибудь</a></li>
-  		</ul>
-	</div>
+<div class="page-header">
+  	<h1>Информация о сущности</h1>
+</div>
 
-	<p ><h1>Название: <b>{{ entity.name }}</b></h1></p>
-	<h2>
-		Тип: 
-		{% if entity.type == "Theorem" %}Теорема{% endif %}
-		{% if entity.type == "Definition" %}Определение{% endif %}
-	</h2>
-	<h2>Описание:</h2>
-	{{ entity.description }}
+<div class="btn-group" role="group" aria-label="...">
+  	<a href="{% url 'entityAdd'%}" ><button type="button" class="btn btn-default">Add</button></a>
+  	<a href="{% url 'entityUpdate' entity.id %}" ><button type="button" class="btn btn-default">Update</button></a>
+</div>
 
-	<p style='margin-top: 20px;'><b>Похоже тут будет граф </b></p>
- 
+	<!-- panel start -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+    	<p ><h3>{{ entity.name }}</h3></p>
+  	</div>
+       
+    <div class="panel-body">
+        <form class="form-horizontal row-border">
+
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Название</label>
+            	<div class="col-md-10">
+                	<div class="alert alert-success">
+                		{{ entity.name }}
+                	</div>
+              	</div>
+            </div>
+
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Тип сушности</label>
+            	<div class="col-md-10">
+                	<div class="alert alert-success">
+                		{{ entity.type }}
+                	</div>
+              	</div>
+            </div>
+
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Описание сушности</label>
+            	<div class="col-md-10">
+                	<div class="alert alert-success">
+                		{{ entity.description }}
+                	</div>
+              	</div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<!-- panel end -->
+
+<div class="page-header">
+  	<h3>Граф связей сущности<small>(сущность выделена красным)</small></h3>
+</div>
+{%include 'ontologySite/graphAll.html'%}
+
  {% endblock %}
  
