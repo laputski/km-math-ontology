@@ -5,7 +5,9 @@ from . import views
 urlpatterns = [
     url(r'^$', views.mainPage, name='mainPage'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^entitis/(?P<entity_id>[0-9]+)/$', views.entity, name='entity'),
-    url(r'^entitis/(?P<entity_id>[0-9]+)/update$', views.entityUpdate, name='entityUpdate'),
-    url(r'^entitis/add/$', views.entityAdd, name='entityAdd'),
+    url(r'^entities/(?P<entity_id>[0-9]+)/$', views.entity, name='entity'),
+    url(r'^update-entity/(?P<entity_id>[0-9]+)$', views.entityUpdate, name='entityUpdate'),
+    url(r'^create-entity/$', views.entityAdd, name='entityAdd'),
+    url(r'^entities/[0-9]+/search/$', views.search_titles, name='search_titles'),
+    url(r'^search/$', views.search_titles, name='search_titles'),
 ]

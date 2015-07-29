@@ -5,10 +5,10 @@
   		<h1>Math ontology </h1>
 	</div>
 
-	{% if entityList %}
+	{% if entitiesList %}
 		<b>Список всех теорем</b>:
 	    <ul>
-	    {% for entity in entityList %}
+	    {% for entity in entitiesList %}
 			{% if entity.type == "Theorem" %}
 				<li><a href="{% url 'entity' entity.id %}">{{ entity.name }}</a></li>
 			{% endif %}
@@ -16,7 +16,7 @@
 	    </ul>
 		<b>Список всех определений</b>:
 	    <ul>
-	    {% for entity in entityList %}
+	    {% for entity in entitiesList %}
 			{% if entity.type == "Definition" %}
 				<li><a href="{% url 'entity' entity.id %}">{{ entity.name }}</a></li>
 			{% endif %}
@@ -27,6 +27,6 @@
 	    <p>Ваша база данных пуста. Заполните её.(</p>
 	{% endif %}
 
-{%include 'ontologySite/graphAll.html'%}
+{%include 'ontologySite/graph.html'%}
 
 {% endblock %}

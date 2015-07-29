@@ -1,0 +1,11 @@
+{% if length > 0 %}
+
+{% for entity in entitiesList %}
+	<li><a href="/entitis/{{ entity.id }}/">{{ entity.name }}</a></li>
+{% endfor %}
+
+{% else %}
+
+<li>Совпадений не найдено</li>
+
+{% endif %}
