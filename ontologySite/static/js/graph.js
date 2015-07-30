@@ -1,9 +1,9 @@
 var Nodes = [];
 for (var i = 0; i < Id.length; i++) {
  if (Type[i] == "Theorem")
-       Nodes[i] = {"size": 100, "score": Score[i]/10, "id": Type[i], "type": "circle"}
+       Nodes[i] = {"size": 100, "score": Score[i]/10, "id": Name[i], "type": "circle"}
  if (Type[i] == "Definition")
-       Nodes[i] = {"size": 60, "score": Score[i]/10, "id": Type[i], "type": "circle"}
+       Nodes[i] = {"size": 60, "score": Score[i]/10, "id": Name[i], "type": "circle"}
                                     };
 
 var Sum = 0;
