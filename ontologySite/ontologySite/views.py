@@ -15,7 +15,7 @@ def mainPage(request):
         elif entity.type == 'Definition':
             entity.score = 5
         else: entity.score = 0
-        
+    
     args = {}
     args.update(csrf(request))
     args['entitiesList'] = entity_list
