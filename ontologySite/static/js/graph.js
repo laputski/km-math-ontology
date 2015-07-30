@@ -1,6 +1,9 @@
 var Nodes = [];
 for (var i = 0; i < Id.length; i++) {
-       Nodes[i] = {"size": 80, "score": Score[i]/10, "id": Name[i], "type": "circle"}
+ if (Type[i] == "Theorem")
+       Nodes[i] = {"size": 100, "score": Score[i]/10, "id": Type[i], "type": "circle"}
+ if (Type[i] == "Definition")
+       Nodes[i] = {"size": 60, "score": Score[i]/10, "id": Type[i], "type": "circle"}
                                     };
 
 var Sum = 0;
@@ -43,7 +46,7 @@ var color = d3.scale.linear()
         .domain([min_score, (min_score + max_score) / 2, max_score])
         .range(["lime", "yellow", "red"]);
 
-var highlight_color = "blue";
+var highlight_color = "red";
 var highlight_trans = 0.1;
 
 var size = d3.scale.pow().exponent(1)
@@ -51,7 +54,7 @@ var size = d3.scale.pow().exponent(1)
         .range([8, 24]);
 
 var force = d3.layout.force()
-        .linkDistance(60)
+        .linkDistance(80)
         .charge(-300)
         .size([w, h]);
 
@@ -172,18 +175,20 @@ else
                 return '\u2002' + d.id;
             });
 
-node.on("mouseover", function (d) {
-    set_highlight(d);
-})
+node
+        .on("mouseover", function (d) {
+            set_highlight(d);
+            tip.show(d)
+        })
         .on("mousedown", function (d) {
             d3.event.stopPropagation();
             focus_node = d;
             set_focus(d)
             if (highlight_node === null) set_highlight(d)
-
-        }).on("mouseout", function (d) {
+        })
+        .on("mouseout", function (d) {
             exit_highlight();
-
+            tip.hide(d)
         });
 
 d3.select(window).on("mouseup",
@@ -252,6 +257,23 @@ function set_highlight(d) {
     }
 }
 
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+     return "<strong>Description:</strong> <span style='color:red'>" + Description[d.index] + "</span>";
+      })
+
+var vis = d3.select(document.body)
+      .append('svg')
+      .call(tip)
+
+vis.append('node')
+      .attr('width', 100)
+      .attr('height', 100)
+      // Show and hide the tooltip
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
 zoom.on("zoom", function () {
 
