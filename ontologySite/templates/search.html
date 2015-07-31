@@ -3,9 +3,14 @@
 {% csrf_token %}
 	<div class="input-group add-on">
     	<input type="text" class="form-control" placeholder="Поиск" name="search" id="search">
+    	<!-- 
+    	Как по мне кнопочка никому не мешает, а внешний вид без неё не страдает.
+    	И вместо того, чтобы удалять её, почему бы не придумать(а ещё лучше реализовать) функцилнал для неё. 
+    	-->
     	<div class="input-group-btn">
              <button class="btn btn-primary" type="submit">Try</button>
-       </div>
+        </div>
+
    	</div>
     <ul id="search-results">
     	

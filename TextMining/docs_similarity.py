@@ -5,8 +5,7 @@ Created on Sun Jul 26 15:48:42 2015
 @author: Anton Kulesh
 """
 # Строится векторная модель документов коллекции. Используется мера TF-IDF.
-# Каждый вектор отражает важность слов(=термов) в документе.
-# При сравнение документов используется косинусная мера.
+# Каждый вектор отражает важност слов(=термов) в документе.
 # Предварительно необходимо установить библиотеки: nltk, gensim.
 
 import nltk.corpus
@@ -17,6 +16,12 @@ from gensim import corpora, models, similarities
 stemmer_func = nltk.stem.snowball.SnowballStemmer("english").stem
 stopwords = set(nltk.corpus.stopwords.words('english'))
 
+################################ Подготовка данных ############################
+mystopwords=['whose','also','one','two','three','four','speak','call']
+for w in mystopwords:
+    stopwords.add(w)
+
+# Загрузка csv-коллекции    
 def csv_open(filename):
     f=open(filename, 'rb')
     reader = csv.reader(f)
@@ -25,70 +30,114 @@ def csv_open(filename):
         s.append(row)
     return s
 
-def doc_list(collection_name):
+# Создание списков с названиями документов и их описаниями
+def docs_list(collection_name):
     entities=csv_open(collection_name)
-    docs=[]
-    for Type,Name,Desc in entities:
-        docs.append(Desc)        #Список документов (утверждений)
-    return docs
+    names,docs=[],[]
+    for Type,Name,Keys,Desc in entities:
+        names.append(Name)        # Список названий документов 
+    for Type,Name,Keys,Desc in entities:
+        docs.append(Desc)        # Список документов (утверждений)
+    return [names,docs]
     
+# Нормализация токенов (слов)
 def normalize_word(word):
-    return stemmer_func(word.lower()) #Стемминг слов
-    
-def get_tokens(documents):
-    token_lists=[[normalize_word(word) for word in word_tokenize(document) if word not in stopwords] for document in documents]
-    return token_lists  #Получение списка токенов для каждого документа
-    
-def main_terms(documents):  # Выделение ключевых слов из каждого документа
-    token_lists=get_tokens(documents)
-    texts = [[w for w in token_list if len(w)>2 and not w in stopwords and w.isalpha()] for token_list in token_lists]
-    all_tokens=[item for sublist in texts for item in sublist]
-    texts = [[w for w in text if all_tokens.count(w)>1] for text in texts]
-    return texts
+    return stemmer_func(word.lower())
 
-def dict(documents,path,name):  # Создание словаря терминов
-    terms=main_terms(documents)
+# Получение списка токенов документа    
+def get_tokens(doc):
+    token_list=[normalize_word(word) for word in word_tokenize(doc) if word not in stopwords]
+    return token_list  
+    
+# Выделение основных слов (термов) из каждого документа
+def main_terms(docs): 
+    token_lists=[get_tokens(doc) for doc in docs]
+    texts = [[w for w in token_list if w not in stopwords if len(w)>2 and w.isalpha() or w in re.findall(r'[a-z]+\-[a-z]+',w)] for token_list in token_lists]
+    if len(docs)!=1:
+        all_tokens=[item for sublist in texts for item in sublist]
+        terms = [[w for w in text if all_tokens.count(w)>1] for text in texts]
+    else: terms=texts
+    return terms
+
+# Создание словаря терминов
+def dic(docs,path='E:\\Ontology\\workspace',name='ontology'):  
+    terms=main_terms(docs)
     dictionary = corpora.Dictionary(terms)
     dictionary.save(path+'\\'+name+'.dict') #Сохранение словаря на диск
-    return dictionary
-    
+    print '''The dictionary is created!\nTo open enter:\ndictionary = corpora.Dictionary.load(path+'\\\\'+name+'.dict')\n'''
 
-def corp(documents,path,name): # Создание корпуса
-    dictionary=dict(documents,path,name)
-    terms=main_terms(documents)
+# Необходимо указать путь к Вашей рабочей папке и придумать название для словаря(корпуса)
+path= 'E:\\Ontology\\workspace'
+name='ontology'     
+
+# Создание корпуса
+def corp(docs,path='E:\\Ontology\\workspace',name='ontology'): 
+    dictionary = corpora.Dictionary.load(path+'\\'+name+'.dict')
+    terms=main_terms(docs)
     corpus = [dictionary.doc2bow(term) for term in terms]
     corpora.MmCorpus.serialize(path+'\\'+name+'.mm', corpus) #Сохранение корпуса
-    return corpus    
+    print '''The corpus is created!\nTo open enter:\ncorpus = corpora.MmCorpus(path+'\\\\'+name+'.mm')\n'''   
 
-#Сравнение документов (пример)    
-docs=doc_list('Collection.csv')
-path= 'E:\\Ontology\\workspace'
-name='ontology'
-corpus=corp(docs,path,name)
-num_features=len(dict(docs,path,name))
+############################ Сравнение документов #############################  
 
-#Сравним 3-й документ коллекции со всеми остальными и выведем номера документов,
-#которые с данным документом имеют меру "схожести" > 0.2.
-tfidf = models.TfidfModel(corpus)
-vec = corpus[2]
-index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features)
-sims = index[tfidf[vec]]
+docs=docs_list('Collection.csv')[1]
+dic(docs)
+corp(docs)
+ 
+# Для заданного документа(doc) из документов всей коллекции (docs) выбираются документы, которые на него(doc) "похожи".  
+# Для сравнения документов можно использовать модели 'tfidf'('1') или 'lsa'('2','lsi'). Также можно указать желаемую точность алгоритмя 0<accuracy<1
+def sim_docs(doc,docs,accuracy=0.2,model="tfidf",path='E:\\Ontology\\workspace',name='ontology'):
+    corpus = corpora.MmCorpus(path+'\\'+name+'.mm')
+    dictionary = corpora.Dictionary.load(path+'\\'+name+'.dict')
+# Преобразование документа в вектор
+    doc_terms=main_terms([doc])[0]
+    vec=dictionary.doc2bow(doc_terms)
+# Создание tfidf-модели корпуса    
+    tfidf = models.TfidfModel(corpus,id2word=dictionary) 
+# Использование первой модели
+    if model.lower()=="tfidf" or model=='1':
+        index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=len(dictionary))
+        sims = sorted(enumerate(index[vec]), key=lambda item: -item[1])
+        sims = [(doc,sim) for (doc,sim) in sims if sim>accuracy]
+# Использование второй модели; создание "обёрки" вокруг tfidf      
+    elif model.lower()=="lsa" or model.lower()=="lsi" or model=='2':
+        lsi = models.LsiModel(tfidf[corpus], id2word=dictionary, num_topics=20)
+        corpus_lsi = lsi[tfidf[corpus]]
+        vec_lsi=lsi[vec]
+        index = similarities.SparseMatrixSimilarity(corpus_lsi,num_features=len(dictionary))
+        sims = sorted(enumerate(index[vec_lsi]), key=lambda item: -item[1])
+        sims = [(doc,sim) for (doc,sim) in sims if sim>accuracy]
+# Если список "похожих" документов пуст, то алгоритм возвращает -1       
+    if sims!=[]:
+        return sims[1:]
+    else: return -1
 
-for (doc,sim) in list(enumerate(sims)):
-    if 0.99>sim>0.2:
-        print (doc+1,sim) #Вывод: (номер документа, мера "схожести" с ним)
+####################### Выделение ключевых слов ###############################
     
-  
+def key_words(doc,docs,num=4,path='E:\\Ontology\\workspace',name='ontology'):
+    corpus = corpora.MmCorpus(path+'\\'+name+'.mm')
+    dictionary = corpora.Dictionary.load(path+'\\'+name+'.dict')
+# Создание tfidf-модели корпуса. Преобразование документа в tfidf-вектор
+    tfidf = models.TfidfModel(corpus,id2word=dictionary)
+    doc_terms=main_terms([doc])[0]
+    vec=dictionary.doc2bow(doc_terms)
+# Координаты вектора(vec) имеют вид (term,weight), где term - номер термина в словаре, weight - вес данного слова в документе
+# Сортировка координат вектора(vec) по весу ("важности")
+    tfidf_vec=sorted(tfidf[vec], key=lambda item: -item[1])
+# Формирование упорядоченного списка ключевых слов
+    key_terms=[dictionary[key] for (key,_) in tfidf_vec] 
+# Если искомый список оказался пуст, то возвращается значение -1
+    if key_terms!=[]:
+        if len(key_terms)<=3 or len(key_terms)<=num:
+            return key_terms
+        else: return key_terms[:num]
+    else: return -1
 
-   
-    
-    
-    
-    
-    
-    
-    
-    
+        
+        
+
+
+
     
     
     

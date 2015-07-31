@@ -1,32 +1,36 @@
-Type,Name,Description
-Lemma,Hadamard,"Let f be a smooth, real-valued function defined on an open, star-convex neighborhood U of a point a in n-dimensional Euclidean space. Then f(x) can be expressed, for all x in U, in the form: f(x)=f(a)+sum_{i=1}^n (x_i-a_i) g_i(x), where each gi is a smooth function on U, a = (a1,...,an), and x = (x1,...,xn)"
-Definition,Star domain,"In mathematics, a set S in the Euclidean space Rn is called a star domain (or star-convex set, star-shaped or radially convex set) if there exists x0 in S such that for all x in S the line segment from x0 to x is in S"
-Definition,Euclidean space,"Euclidean space encompasses the two-dimensional Euclidean plane, the three-dimensional space of Euclidean geometry, and certain other spaces"
-Definition,Plane,"A plane is a flat, two-dimensional surface"
-Definition,Surface,"A surface is a two-dimensional, topological manifold"
-Definition,Vector space,"A vector space (also called a linear space) is a collection of objects called vectors, which may be added together and multiplied (""scaled"") by numbers, called scalars in this context"
-Definition,Vector,An element of a vector space
-Definition,Scalar,"In linear algebra, real numbers are called scalars and relate to vectors in a vector space through the operation of scalar multiplication, in which a vector can be multiplied by a number to produce another vector"
-Theorem,Heine-Cantor,"If f : M->N is a continuous function between two metric spaces, and M is compact, then f is uniformly continuous. An important special case is that every continuous function from a closed interval to the real numbers is uniformly continuous"
-Definition,Continuous function,"A continuous function is, roughly speaking, a function for which small changes in the input result in small changes in the output"
-Definition,Compact space,"Compactness is a property that generalizes the notion of a subset of Euclidean space being closed (that is, containing all its limit points) and bounded (that is, having all its points lie within some fixed distance of each other)"
-Lemma,Borel,"Suppose U is an open set in the Euclidean space Rn, and suppose that f0, f1 ... is a sequence of smooth functions on U. If I is an any open interval in R containing 0 (possibly I = R), then there exists a smooth function F(t, x) defined on IxU, such that ... for k >= 0 and x in U"
-Definition,Open set,"In topology, an open set is an abstract concept generalizing the idea of an open interval in the real line"
-Theorem,Beer," if (X, d) is a complete, separable metric space, then Cl(X) with the Wijsman topology is a Polish space, i.e. it is separable and metrizable with a complete metric"
-Definition,Metric space,"A metric space is a set for which distances between all members of the set are defined. Those distances, taken together, are called a metric on the set"
-Theorem,Admissible unlabelled constructions,"The constructions of union, cartesian product, sequence, multiset, powerset, and cycle are all admissible. The associated operators are ... The sequence, cycle, and set translations necessitate that Bo = 0. The class ... consisting of the neutral object only, and the class Z consisting of a single ""atomic"" object (node, letter) of size 1 have OGFs"
-Theorem,"Symbolic method, unlabelled case","The generating function of a constructible class is a component of a system of generating function equations whose terms are built from ... The operator Q translating sequences (Seq) is classically known as the quasi-inverse. The operator Exp (multisets, MSET) is called the Polya exponential 2 and Exp (powersets, PSet) is the modified Polya exponential. The operator Log is the Polya logarithm. They are named after Polya who first developed the general enumerative theory of objects under permutation groups"
-Theorem,Implicit specifications,The generating functions associated to the implicit equations in X ... are respectively where Li(k) is the Mobius function
-Theorem,Theorem 19.1., The sum of the widths of the strips is not less than 2.
-Theorem,Theorem 19.2.," If the curve 7 is bounded, that is, lies in a disc of some radius r, centered at the origin, then n 7 ((p,p) = for p > r, and hence the integral has a finite value."
-Definition,Curve,"a curve (also called a curved line in older texts) is, generally speaking, an object similar to a line but which is not required to be straight"
-Theorem,Theorem 19.5., The average absolute curvature of T is not greater than the average absolute curvature of 7.
-Theorem,Theorem 20.1.," Let P be a convex n-gon on the unit sphere, A its area and ai, . . . , a n its angles. Then A = ai - h a n - (n - 2)tt."
-Definition,Angle,"An angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle"
-Theorem,Theorem 20.3., The angle a(j) equals the sum of curvatures of the vertices of P that lie in the domain bounded by 7.
-Theorem,Theorem 21.1., Let P be a convex polyhedron whose vertices are colored black and white so that there are more black vertices and no two black vertices are adjacent. Then P cannot be inscribed into a sphere.
-Definition,Polyhedron,"A polyhedron (plural polyhedra or polyhedrons) is a solid in three dimensions with flat polygonal faces, straight edges and sharp corners or vertices"
-Theorem,"Wallace, Bolyai, Gerwien",Let Pi and P 2 be two plane polygons of the same area. Then it is possible to cut Pi into pieces by straight lines and to reassemble these pieces as P2
-Definition,Polygon,A polygon is traditionally a plane figure that is bounded by a finite chain of straight line segments closing in a loop to form a closed chain or circuit
-Theorem,Theorem 22.2., Let C and T be a cube and a regular tetrahedron of the same volume. Suppose that each of them is cut into the same number of pieces by planes. It is not possible that the two collections of (polyhedral) pieces are the same.
-Definition,Tetrahedron,"a tetrahedron (plural: tetrahedra or tetrahedrons) is a polyhedron composed of four triangular faces, three of which meet at each corner or vertex. It has six edges and four vertices"
+Type,Name,Keywords,Description
+Lemma,Hadamard,None,"Let f be a smooth, real-valued function defined on an open, star-convex neighborhood U of a point a in n-dimensional Euclidean space. Then f(x) can be expressed, for all x in U, in the form: f(x)=f(a)+sum_{i=1}^n (x_i-a_i) g_i(x), where each gi is a smooth function on U, a = (a1,...,an), and x = (x1,...,xn)"
+Definition,Star domain,None,"In mathematics, a set S in the Euclidean space Rn is called a star domain (or star-convex set, star-shaped or radially convex set) if there exists x0 in S such that for all x in S the line segment from x0 to x is in S"
+Definition,Euclidean space,None,"Euclidean space encompasses the two-dimensional Euclidean plane, the three-dimensional space of Euclidean geometry, and certain other spaces"
+Definition,Plane,None,"A plane is a flat, two-dimensional surface"
+Definition,Surface,None,"A surface is a two-dimensional, topological manifold"
+Definition,Vector space,None,"A vector space (also called a linear space) is a collection of objects called vectors, which may be added together and multiplied (""scaled"") by numbers, called scalars in this context"
+Definition,Vector,None,An element of a vector space
+Definition,Scalar,None,"In linear algebra, real numbers are called scalars and relate to vectors in a vector space through the operation of scalar multiplication, in which a vector can be multiplied by a number to produce another vector"
+Theorem,Heine-Cantor,None,"If f : M->N is a continuous function between two metric spaces, and M is compact, then f is uniformly continuous. An important special case is that every continuous function from a closed interval to the real numbers is uniformly continuous"
+Definition,Continuous function,None,"A continuous function is, roughly speaking, a function for which small changes in the input result in small changes in the output"
+Definition,Compact space,None,"Compactness is a property that generalizes the notion of a subset of Euclidean space being closed (that is, containing all its limit points) and bounded (that is, having all its points lie within some fixed distance of each other)"
+Lemma,Borel,None,"Suppose U is an open set in the Euclidean space Rn, and suppose that f0, f1 ... is a sequence of smooth functions on U. If I is an any open interval in R containing 0 (possibly I = R), then there exists a smooth function F(t, x) defined on IxU, such that ... for k >= 0 and x in U"
+Definition,Open set,None,"In topology, an open set is an abstract concept generalizing the idea of an open interval in the real line"
+Theorem,Beer,None,"if (X, d) is a complete, separable metric space, then Cl(X) with the Wijsman topology is a Polish space, i.e. it is separable and metrizable with a complete metric"
+Definition,Metric space,None,"A metric space is a set for which distances between all members of the set are defined. Those distances, taken together, are called a metric on the set"
+Theorem,Admissible unlabelled constructions,None,"The constructions of union, cartesian product, sequence, multiset, powerset, and cycle are all admissible. The associated operators are ... The sequence, cycle, and set translations necessitate that Bo = 0. The class ... consisting of the neutral object only, and the class Z consisting of a single ""atomic"" object (node, letter) of size 1 have OGFs"
+Theorem,"Symbolic method, unlabelled case",None,"The generating function of a constructible class is a component of a system of generating function equations whose terms are built from ... The operator Q translating sequences (Seq) is classically known as the quasi-inverse. The operator Exp (multisets, MSET) is called the Polya exponential 2 and Exp (powersets, PSet) is the modified Polya exponential. The operator Log is the Polya logarithm. They are named after Polya who first developed the general enumerative theory of objects under permutation groups"
+Theorem,Implicit specifications,None,The generating functions associated to the implicit equations in X ... are respectively where Li(k) is the Mobius function
+Theorem,Theorem 19.1.,None, The sum of the widths of the strips is not less than 2.
+Theorem,Theorem 19.2.,None," If the curve 7 is bounded, that is, lies in a disc of some radius r, centered at the origin, then n 7 ((p,p) = for p > r, and hence the integral has a finite value."
+Definition,Curve,None,"a curve (also called a curved line in older texts) is, generally speaking, an object similar to a line but which is not required to be straight"
+Theorem,Theorem 19.5.,None, The average absolute curvature of T is not greater than the average absolute curvature of 7.
+Theorem,Theorem 20.1.,None," Let P be a convex n-gon on the unit sphere, A its area and ai, . . . , a n its angles. Then A = ai - h a n - (n - 2)tt."
+Definition,Angle,None,"An angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle"
+Theorem,Theorem 20.3.,None, The angle a(j) equals the sum of curvatures of the vertices of P that lie in the domain bounded by 7.
+Theorem,Theorem 21.1.,None, Let P be a convex polyhedron whose vertices are colored black and white so that there are more black vertices and no two black vertices are adjacent. Then P cannot be inscribed into a sphere.
+Definition,Polyhedron,None,"A polyhedron (plural polyhedra or polyhedrons) is a solid in three dimensions with flat polygonal faces, straight edges and sharp corners or vertices"
+Theorem,"Wallace, Bolyai, Gerwien",None,Let Pi and P 2 be two plane polygons of the same area. Then it is possible to cut Pi into pieces by straight lines and to reassemble these pieces as P2
+Definition,Polygon,None,A polygon is traditionally a plane figure that is bounded by a finite chain of straight line segments closing in a loop to form a closed chain or circuit
+Theorem,Theorem 22.2.,None, Let C and T be a cube and a regular tetrahedron of the same volume. Suppose that each of them is cut into the same number of pieces by planes. It is not possible that the two collections of (polyhedral) pieces are the same.
+Definition,Tetrahedron,None,"a tetrahedron (plural: tetrahedra or tetrahedrons) is a polyhedron composed of four triangular faces, three of which meet at each corner or vertex. It has six edges and four vertices"
+Definition,Triangle,None,A triangle is a polygon with three edges and three vertices. It is one of the basic shapes in geometry
+Definition,Edge,None,"In geometry, an edge is a particular type of line segment joining two vertices in a polygon, polyhedron, or higher-dimensional polytope"
+Definition,Vertex,None,"In geometry, a vertex (plural vertices) is a special kind of point that describes the corners or intersections of geometric shapes"
+Definition,Set,None,"In mathematics, a set is a collection of distinct objects, considered as an object in its own right"
