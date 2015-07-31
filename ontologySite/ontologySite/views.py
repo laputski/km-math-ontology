@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-        
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
 from . import workWithNeo4j
 from django.core.context_processors import csrf
-from django.core.urlresolvers import reverse
-    
+
 def mainPage(request):
     entity_list = workWithNeo4j.allEntities()
     
@@ -47,38 +45,13 @@ def entity(request, entity_id):
     return render_to_response('ontologySite/entity.html', args)
     
 def entityUpdate(request, entity_id):
-    
     entity = workWithNeo4j.entityById(entity_id)
     childrens = workWithNeo4j.getChildrens(entity_id)
     parents = workWithNeo4j.getParents(entity_id)
-    
-    if request.method == 'POST':
-        #newEntityType = request.POST.get("entityType", "Тут пока что ничего нет...")
-        entityType = workWithNeo4j.getType(entity_id)
-        newEntityName = request.POST.get("entityName", "Тут пока что ничего нет...")
-        newEntityDescription = request.POST.get("entityDescription", "Тут пока что ничего нет...")
-        workWithNeo4j.updateEntity(entity_id, entityType, newEntityName, newEntityDescription)
-        
-        redirect_url = reverse('entity', args=[entity_id])
-        return HttpResponseRedirect(redirect_url)
-    else:
-        print('get')
-        
     context = RequestContext(request, {'entity': entity, 'childrens': childrens, 'parents': parents})
     return render(request, 'ontologySite/entityUpdate.html', context)
     
 def entityAdd(request):
-    if request.method == 'POST':
-        entityType =  request.POST.get("entityType", "Ошибка")
-        entityName = request.POST.get("entityName", "Тут пока что ничего нет...")
-        entityDescription = request.POST.get("entityDescription", "Тут пока что ничего нет...")
-        entityId = workWithNeo4j.addEntity(entityType, entityName, entityDescription)
-        
-        redirect_url = reverse('entity', args=[entityId])
-        return HttpResponseRedirect(redirect_url)
-    else:
-        print('get')
-        
     context = RequestContext(request, {})
     return render(request, 'ontologySite/entityAdd.html', context)
 

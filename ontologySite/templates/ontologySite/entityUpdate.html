@@ -5,45 +5,45 @@
     <h1>Редактирование сущности</h1>
 </div>
 
+<div class="btn-group" role="group" aria-label="...">
+	<a href="{% url 'entityUpdate' entity.id %}" ><button type="button" class="btn btn-default">Save</button></a>
+  <a href="{% url 'entity' entity.id %}" ><button type="button" class="btn btn-default">Cancel</button></a>
+</div>
+
 <!-- panel start -->
 <div class="panel panel-default">
     <div class="panel-heading">
-      <h3><b>Редактировать сущность</b></h3>
-    </div>
+    	<h3><b>Редактировать сущность</b></h3>
+  	</div>
        
     <div class="panel-body">
+        <form class="form-horizontal row-border">
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Тип сушности</label>
+            	<div class="col-md-10">
+                	<input class="form-control" id="entityTupe" type="text" disabled="disabled" value= "{{entity.type}}">
+              	</div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Название сущности</label>
+            	<div class="col-md-10">
+                	<input class="form-control" id="entityName" type="text" value= "{{entity.name}}">
+              	</div>
+            </div> 
+            <div class="form-group">
+            	<label class="col-md-2 control-label">Описание сушности</label>
+            	<div class="col-md-10">
+                <textarea class="form-control" id="entityDescription" rows=5>
+                  {{entity.description}}
+                </textarea>
+              </div>
+            </div> 
+        </form>
+    </div>
+</div>
+ <!-- panel end -->
 
-    <form class="form-horizontal row-border" method="post">{% csrf_token %}
 
-      <div class="form-group">
-        <label class="col-md-2 control-label">Тип сушности</label>
-        <div class="col-md-10">
-            <input  class="form-control" name="entityType" id="entityType" type="text" value= "{{entity.type}}" disabled="disabled">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-2 control-label">Название сущности</label>
-        <div class="col-md-10">
-          <input  class="form-control" name="entityName" id="entityName" type="text"  value= "{{entity.name}}">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-2 control-label">Описание сушности</label>
-        <div class="col-md-10">
-          <textarea class="form-control"  name="entityDescription" id="entityDescription" rows=5>{{entity.description}}</textarea>
-        </div>
-      </div> 
-
-      
-        <button type="submit" class="btn btn-primary btn-lg active">Save</button>
-        <a href="{% url 'entity' entity.id %}" ><button type="button" class="btn btn-default btn-lg active">Cancel</button></a>
-      
-
-    </form>
-  </div>
-</div><!-- panel finish -->
  
  {% endblock %}
  
