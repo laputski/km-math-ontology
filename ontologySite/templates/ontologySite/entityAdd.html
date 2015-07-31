@@ -6,42 +6,45 @@
     <h1>Добавление новой сущности</h1>
 </div>
 
-<div class="btn-group" role="group" aria-label="...">
-	<a href="{% url 'entityAdd'%}" ><button type="button" class="btn btn-default">Save</button></a>
-  	<a href="{% url 'mainPage'%}" ><button type="button" class="btn btn-default">Cancel</button></a>
-</div>
-
-<!-- panel start -->
 <div class="panel panel-default">
     <div class="panel-heading">
-    	<h3><b>Новая сущность</b></h3>
-  	</div>
+      <h3><b>Новая сущность</b></h3>
+    </div>
        
     <div class="panel-body">
-        <form class="form-horizontal row-border">
+
+        <form class="form-horizontal row-border" method="post">{% csrf_token %}
+
             <div class="form-group">
-            	<label class="col-md-2 control-label">Тип сушности</label>
-            	<div class="col-md-10">
-                	<input class="form-control" id="entityTupe" type="text">
-              	</div>
+                <label class="col-md-2 control-label">Тип сушности</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="entityType" type="text">
+                        <option value="" selected disabled>Выберети тип сушности</option>
+                        <option>Theorem</option>
+                        <option>Definition</option>
+                    </select>
+                </div>
             </div>
+
             <div class="form-group">
-            	<label class="col-md-2 control-label">Название сущности</label>
-            	<div class="col-md-10">
-                	<input class="form-control" id="entityName" type="text">
-              	</div>
-            </div> 
+                <label class="col-md-2 control-label">Название сущности</label>
+                <div class="col-md-10">
+                    <input  class="form-control" name="entityName" id="entityName" type="text">
+                </div>
+            </div>
+
             <div class="form-group">
-            	<label class="col-md-2 control-label">Описание сушности</label>
-            	<div class="col-md-10">
-                <textarea class="form-control" id="entityDescription" rows=5>
-                </textarea>
-              </div>
+                <label class="col-md-2 control-label">Описание сушности</label>
+                <div class="col-md-10">
+                    <textarea class="form-control"  name="entityDescription" id="entityDescription" rows=5></textarea>
+                </div>
             </div> 
+
+            <button type="submit" class="btn btn-primary btn-lg active">Save</button>
+            <a href="{% url 'mainPage'%}" ><button type="button" class="btn btn-default btn-lg active">Cancel</button></a>
         </form>
     </div>
-</div>
- <!-- panel end -->
+</div><!-- panel finish -->
  
  {% endblock %}
  
