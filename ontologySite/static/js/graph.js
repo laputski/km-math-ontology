@@ -55,7 +55,7 @@ var size = d3.scale.pow().exponent(1)
 
 var force = d3.layout.force()
         .linkDistance(80)
-        .charge(-300)
+        .charge(-1000)
         .size([w, h]);
 
 var default_node_color = "#ccc";
@@ -181,10 +181,9 @@ node
             tip.show(d)
         })
         .on("mousedown", function (d) {
-            d3.event.stopPropagation();
             focus_node = d;
-            set_focus(d)
-            if (highlight_node === null) set_highlight(d)
+            set_focus(d)       
+           
         })
         .on("mouseout", function (d) {
             exit_highlight();
@@ -292,7 +291,7 @@ zoom.on("zoom", function () {
                 return d.type;
             }))
 
-    //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+    circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
     if (!text_center) text.attr("dx", function (d) {
         return (size(d.size) * base_radius / nominal_base_node_size || base_radius);
     });
@@ -355,9 +354,6 @@ function keydown() {
     }
     else if (d3.event.keyCode >= 48 && d3.event.keyCode <= 90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey) {
         switch (String.fromCharCode(d3.event.keyCode)) {
-            case "C":
-                keyc = !keyc;
-                break;
             case "S":
                 keys = !keys;
                 break;
@@ -372,12 +368,6 @@ function keydown() {
                 break;
             case "D":
                 keyd = !keyd;
-                break;
-            case "L":
-                keyl = !keyl;
-                break;
-            case "M":
-                keym = !keym;
                 break;
             case "H":
                 keyh = !keyh;
